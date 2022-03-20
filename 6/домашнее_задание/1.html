@@ -42,18 +42,27 @@
   /*
   1. Установите всем элементам с классом "productName" размер шрифта 24px.
    */
-
+  const productNameEl = document.querySelectorAll('.productName');
+  for(let el of productNameEl) { el.style.fontSize = '24px';}
 
   /*
   2. Установите всем элементам с классом "product" внешний отступ справа 50px.
    */
-
+  const productEl = document.querySelectorAll('.product');
+  for(let el of productEl) { el.style.marginRight = '50px';}
 
   /*
   3. При клике на кнопку "В корзину" название кнопки должно поменяться на
   "Добавлено" и кнопка должна стать неактивной.
    */
 
+  const buttonEl = document.querySelectorAll('button');
+  for(let el of buttonEl) { 
+     el.addEventListener('click', event => {
+        event.target.innerText = 'Добавлено';
+        event.target.disabled = true;
+     })
+   }
 
   /*
   4. Создайте полную (глубокую) копию элемента с классом product, измените в
@@ -61,15 +70,25 @@
   https://picsum.photos/id/1080/200/300
   Поставьте название товара в данной копии "Товар 4" и замените последний
   отображенный товар на странице на созданную копию. У данной копии также
-  должен правильно работать код из 3-го задания.
+  должен правильно работать код из 3-го задания. 
    */
+  const clonedProduct = document.querySelector('.product').cloneNode(true);
+  productEl[productEl.length-1].after(clonedProduct);
 
+  clonedProduct.querySelector('.productName').textContent = 'Товар 4';
+  clonedProduct.querySelector('img').src = 'https://picsum.photos/id/1080/200/300';
+
+  clonedProduct.querySelector('button').addEventListener('click', event => {
+        event.target.innerText = 'Добавлено';
+        event.target.disabled = true;
+     })
 
   /*
   5. По истечению 2 секунд с момента открытия страницы первый товар должен быть
   удален из html.
    */
-
+  
+  setTimeout(() => (document.querySelector('.product').hidden = true), 2000);
 
 </script>
 </body>
