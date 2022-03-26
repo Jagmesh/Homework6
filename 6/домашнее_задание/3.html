@@ -37,18 +37,76 @@
   1. При наведении на любую из звезд, данной звезде должен ставиться класс
   golden, также такой класс должен ставиться всем звездам до нее слева.
   */
+  const starEls = document.querySelectorAll('.fa-star');
+  for (let i = 0; i < starEls.length; i++) {
+    starEls[i].addEventListener('mouseover', event => {
+      //el.classList.add('golden');
+      // 0 1 2 3 4
+      addGold(i);     
+    });
+  }
 
+  function addGold (i) {
+    switch (i) {
+        case 0: 
+        starEls[i].classList.add('golden');
+        break;
+
+        case 1: 
+        starEls[i].classList.add('golden');
+        starEls[i-1].classList.add('golden');
+        break;
+
+        case 2: 
+        starEls[i].classList.add('golden');
+        starEls[i-1].classList.add('golden');
+        starEls[i-2].classList.add('golden');
+        break;
+
+        case 3: 
+        starEls[i].classList.add('golden');
+        starEls[i-1].classList.add('golden');
+        starEls[i-2].classList.add('golden');
+        starEls[i-3].classList.add('golden');
+        break;
+
+        case 4: 
+        starEls[i].classList.add('golden');
+        starEls[i-1].classList.add('golden');
+        starEls[i-2].classList.add('golden');
+        starEls[i-3].classList.add('golden');
+        starEls[i-4].classList.add('golden');
+        break;
+
+        default:
+      }
+  }
 
   /*
   2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
   задания должны быть удалены.
    */
 
+  /*for (let el of starEls) {
+    el.addEventListener('mouseleave', event => {
+      for (let elLower of starEls)
+      elLower.classList.remove('golden');   
+    });
+  }*/
+
+    document.querySelector('.stars_container').addEventListener('mouseleave', event => {
+      //el.classList.add('golden');
+      // 0 1 2 3 4
+      for (let elLower of starEls)
+      elLower.classList.remove('golden');   
+    });
 
   /*
   3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
   звезды (временно могут становиться черными). Почему так? Напишите словами.
   Можем ли мы это исправить? Если да, то предложите решение.
+
+  Потому что я ранее повесил обработчик на каждую отдельную звезду. Если повесить на весь контейнер то все будет нормально
   */
 
 

@@ -65,6 +65,9 @@
   должно моментально отображаться в span. То есть при печати в input'е тег span
   также должен меняться.
   */
+  document.getElementById('from').addEventListener('input', event => {
+    document.querySelector('span').innerText = event.target.value;
+  } );
 
 
   /*
@@ -73,7 +76,10 @@
   1) добавить два класса: animate__animated и animate__fadeInLeftBig
   2) поставить данному элементу стиль visibility в значение 'visible'.
    */
-
+  document.querySelector('.messageBtn').addEventListener('click', event => {
+    document.querySelector('.message').classList.add('animate__animated', 'animate__fadeInLeftBig');
+    document.querySelector('.message').style.visibility = 'visible';
+  });
 
   /*
   3. Необходимо при отправке формы проверить, заполнены ли все поля в этой
@@ -86,7 +92,34 @@
   данному полю).
   Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
    */
+  const inputEl = document.querySelector('form > label > input');
+  const selectEl = document.querySelector('form > label > select');
 
+  document.querySelector('form > button').addEventListener('click', event => {
+    if (!event.target.classList.contains('error')) {
+      event.preventDefault();
+      if(inputEl.value === '') {
+        inputEl.classList.add('error');
+      }
+      else { inputEl.classList.remove('error'); }
+      if (selectEl.value === '') {
+        selectEl.classList.add('error');
+       }
+      else { selectEl.classList.remove('error'); }
+    }
+  });
+
+  inputEl.addEventListener('input', event => {
+    if(event.target.value !== '') {
+      inputEl.classList.remove('error');
+    }
+  });
+
+  selectEl.addEventListener('change', event => {
+    //if(event.target.value !== '') {
+      selectEl.classList.remove('error');
+    //}
+  });
 
 </script>
 </body>
